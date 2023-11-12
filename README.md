@@ -3,15 +3,15 @@
 ## Install
 
 ```
-npm i undoredo
+npm i @lucy2/undoredo
 ```
 
 ## Usage
 
 ```vue
 
-i<script setup lang="ts">
-import UndoRedo from "./index";
+<script setup lang="ts">
+import UndoRedo from "@lucy2/undoredo";
 import { ref } from "vue"
 const input = ref(0);
 
