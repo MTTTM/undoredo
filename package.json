@@ -1,6 +1,6 @@
 {
   "name": "@lucy2/undoredo",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "keywords": [
     "undoredo",
     "js",
@@ -8,11 +8,11 @@
   ],
   "homepage": "https://github.com/MTTTM/undoredo",
   "type": "module",
-  "main": "./dist/undoredo.es.js",
+  "main": "./dist/index.es.js",
   "files": [
     "./dist/index.d.ts",
-    "./dist/undoredo.es.js",
-    "./dist/undoredo.umd.js",
+    "./dist/index.es.js",
+    "./dist/index.umd.js",
     "./LICENSE"
   ],
   "types": "./dist/index.d.ts",

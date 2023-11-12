@@ -15,7 +15,7 @@ export default defineConfig({
     lib: {
       entry:  'src/index.ts', // 设置入口文件
       name: 'undoredo', // 起个名字，安装、引入用
-      fileName: (format) => `undoredo.${format}.js` // 打包后的文件名
+      fileName: (format) => `index.${format}.js` // 打包后的文件名
     },
     sourcemap: false, // 输出.map文件
     

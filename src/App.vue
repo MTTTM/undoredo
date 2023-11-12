@@ -1,13 +1,20 @@
 <script setup lang="ts">
-import UndoRedo from "./index";
+import UndoRedo from "@lucy2/undoredo";
 import { ref } from "vue"
 const input = ref(0);
 
-let undoredo = new UndoRedo(function change() {
-  console.log("change")
-});
+let undoredo = new UndoRedo(() => {
+
+})
 
 
+// undoredo.state = {
+//   current: 1,
+//   queue: [],
+//   commands: {},
+//   commandArray: [],
+//   destroyList: [],
+// }
 undoredo.registry({
   name: "update",
   pushQueue: true,
