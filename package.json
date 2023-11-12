@@ -6,6 +6,7 @@
     "js",
     "typescript"
   ],
+  "homepage": "https://github.com/MTTTM/undoredo",
   "type": "module",
   "files": [
     "./dist/index.d.ts",
