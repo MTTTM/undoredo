@@ -8,6 +8,7 @@
   ],
   "homepage": "https://github.com/MTTTM/undoredo",
   "type": "module",
+  "main": "./dist/undoredo.es.js",
   "files": [
     "./dist/index.d.ts",
     "./dist/undoredo.es.js",
