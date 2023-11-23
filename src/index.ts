@@ -60,7 +60,7 @@ class UndoRedo extends UndoRedoInterface {
     registry(command: Command) {
         this.state.commandArray.push(command);
         this.state.commands[command.name] = (...args) => {
-            const { undo, redo } = command.execute(...args);
+            const { undo, redo,...other } = command.execute(...args);
             undo();
             /**
              * demo
@@ -74,7 +74,7 @@ class UndoRedo extends UndoRedoInterface {
             if (command.pushQueue) {
                 let { queue, current } = this.state;
                 this.state.current = current + 1;
-                queue.push({ undo, redo: redo! });
+                queue.push({ undo, redo: redo!,...other });
             }
             typeof this.changeEvent === 'function' && this.changeEvent();
         }

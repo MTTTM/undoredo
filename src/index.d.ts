@@ -3,6 +3,7 @@ export interface Command {
     pushQueue?: boolean;
     keyboard?: string;
     execute: (...args: any[]) => {
+        [x:string]:any;
         undo(): void;
         redo?(): void;
     },

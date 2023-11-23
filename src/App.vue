@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import UndoRedo from "@lucy2/undoredo";
+// import UndoRedo from "@lucy2/undoredo";
+import UndoRedo from "./index";
 import { ref } from "vue"
 const input = ref(0);
 
@@ -30,13 +31,29 @@ undoredo.registry({
       },
       redo() {
         input.value = state.before;
-      }
+      },
+      oldBlock,
+      newBlock
 
     }
   }
 })
-const descrease = () => undoredo.state.commands.update(Number(input.value) - 1, Number(input.value))
-const increase = () => undoredo.state.commands.update(Number(input.value) + 1, Number(input.value))
+const descrease = () => {
+  undoredo.state.commands.update(Number(input.value) - 1, Number(input.value))
+  console.log(" undoredo.state", undoredo.state)
+}
+const increase = () => {
+  undoredo.state.commands.update(Number(input.value) + 1, Number(input.value))
+  
+}
+const redo=()=>{
+undoredo.state.commands.redo();
+ console.log("change redo .state", undoredo.state.queue)
+}
+const undo=()=>{
+  undoredo.state.commands.undo();
+  console.log("change undo .state", undoredo.state.queue)
+}
 </script>
 
 <template>
@@ -45,8 +62,8 @@ const increase = () => undoredo.state.commands.update(Number(input.value) + 1, N
     <button @click="descrease">--</button>
     <button @click="increase">++</button>
 
-    <button @click="undoredo.state.commands.redo();">redo</button>
-    <button @click="undoredo.state.commands.undo();">undo</button>
+    <button @click="redo">redo</button>
+    <button @click="undo">undo</button>
 
   </div>
 </template>
