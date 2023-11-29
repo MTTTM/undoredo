@@ -1,3 +1,8 @@
+export type StatusHandler=(t:InstanceType<typeof UndoRedoInterface>)=>void
+export interface ConstructorArg{
+ init?:StatusHandler
+ change?:StatusHandler
+}
 export interface Command {
     name: string;
     pushQueue?: boolean;
@@ -21,7 +26,7 @@ export interface State {
     readonly destroyList: (() => void)[];
 }
 export default class UndoRedoInterface {
-    constructor(_changeFn?: () => void);
+    constructor(t:ConstructorArg);
     readonly state: State;
     registry(t: Command): void;
     protected undo(): void;
@@ -30,6 +35,6 @@ export default class UndoRedoInterface {
     protected onKeyDown(e: KeyboardEvent): void;
     protected _keyboardEvent(): void;
     destroy(): void;
-    protected changeEvent?(): void;
+    protected changeEvent?(t:InstanceType<typeof UndoRedoInterface>): void;
 
 }

@@ -1,4 +1,5 @@
-import UndoRedoInterface, { Command, Queue } from "./index.d"
+import UndoRedoInterface, { Command, Queue,ConstructorArg } from "./index.d"
+
 class UndoRedo extends UndoRedoInterface {
 
     readonly state = {
@@ -47,15 +48,19 @@ class UndoRedo extends UndoRedoInterface {
         });
     }
 
-    constructor(changeFn?: () => void) {
-        super();
+    constructor(args:ConstructorArg) {
+        super(args);
+        const {init,change}=args;
         this.undo();
         this.redo();
         this.onKeyDown = this._onKeyDown.bind(this);
         this._keyboardEvent();
-        this.changeEvent = changeFn
+        if(typeof change ==='function'){
+            this.changeEvent = change;
+        }
+        typeof init ==='function'&&init(this);
     }
-    protected changeEvent?: () => void;
+    protected changeEvent?: (t:InstanceType<typeof UndoRedo>) => void;
     protected onKeyDown: (e: KeyboardEvent) => void;
     registry(command: Command) {
         this.state.commandArray.push(command);
@@ -76,7 +81,7 @@ class UndoRedo extends UndoRedoInterface {
                 this.state.current = current + 1;
                 queue.push({ undo, redo: redo!,...other });
             }
-            typeof this.changeEvent === 'function' && this.changeEvent();
+            typeof this.changeEvent === 'function' && this.changeEvent(this);
         }
         //@ts-ignore
         let destroy = typeof command?.init === "function" && command?.init(this);
@@ -125,3 +130,4 @@ class UndoRedo extends UndoRedoInterface {
 }
 
 export default UndoRedo;
+
